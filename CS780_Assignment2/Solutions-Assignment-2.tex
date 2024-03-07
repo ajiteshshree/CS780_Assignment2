@@ -1,0 +1,94 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,amssymb}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{dsfont}
+\usepackage{booktabs}
+\usepackage{lipsum}
+
+\newcommand{\homework}[3]{
+   %\pagestyle{myheadings}
+   \pagestyle{fancy}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS780: Deep Reinforcement Learning} \hfill{}}
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       %\hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #5}, Netid: {\rm #6}} }
+       \hbox to 6.28in { {\textbf{Name}: {\rm #2} \hfill }} 
+        \hbox to 6.28in { {\textbf{Roll NO.}: {\rm #3} \hfill }} 
+       % \hbox to 6.28in { {\textbf{Google Colab Link (as tiny URL link)}: {\rm #4} \hfill }} 
+       %\hbox to 6.28in { {\it TA: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{CS780 -- #1 \hfill #2 (#3)}{CS780 -- #1 \hfill #2 (#3)}%{CS698R -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\Solution}[1]{~\\\fbox{\textbf{Solution to Problem #1}}}
+
+\cfoot{\thepage}
+
+
+%#######################################################################
+%      WARNING:                   DO NOT CHANGE ANY OF THE LINES ABOVE 
+%      WARNING:                   DO NOT CHANGE ANY OF THE LINES ABOVE 
+%#######################################################################
+%#######################################################################
+
+
+
+\begin{document}
+\homework{Assignment \#1}{James Bond}{0000007}%{\url{www.tinyurl.com}}
+
+%#######################################################################
+%%%%%%%%%%%%%%%%% PROBLEM 1 %%%%%%%%%%%%%%%%%%%%%%
+%#######################################################################
+%#######################################################################
+
+
+\Solution{1: Multi-armed Bandits}
+\\
+%%%%%%%%%%%%%%%%%%
+% Remove the lines below these are only for demo
+%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item \lipsum[1]
+\item \lipsum[2]
+\item \lipsum[3]
+\item \lipsum[4]
+\item \lipsum[5]
+\end{enumerate}
+
+
+\Solution{2: MC Estimates and TD Learning}
+\\
+%%%%%%%%%%%%%%%%%%
+% Remove the lines below these are only for demo
+%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item \lipsum[4]
+\item \lipsum[5]
+\item \lipsum[6]
+\item \lipsum[5]
+\item \lipsum[6]
+\end{enumerate}
+
+
+\end{document}

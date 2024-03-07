@@ -1,0 +1,398 @@
+\documentclass[a4 paper]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{dsfont}
+%\usepackage{minipage}
+
+\usepackage[utf8x]{inputenc}
+
+%\usetikzlibrary{through,backgrounds}
+
+%\hypersetup{%
+%pdfauthor={Ashutosh Modi},%
+%pdftitle={Homework},%
+%pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
+%pdfcreator={PDFLaTeX},%
+%pdfproducer={PDFLaTeX},%
+%}
+
+
+%\usetikzlibrary{shadows}
+% \usepackage[francais]{babel}
+\usepackage{booktabs}
+%\input{macros.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% START OF MACROS
+
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\numberwithin{equation}{section}
+
+%\newcommand{\homework}[6]{
+%   \pagestyle{myheadings}
+%   \thispagestyle{plain}
+%   \newpage
+%   \setcounter{page}{1}
+%   \noindent
+%   \begin{center}
+%   \framebox{
+%      \vbox{\vspace{2mm}
+%    \hbox to 6.28in { {\bf CS698R:~Deep Reinforcement Learning \hfill {\small (#2)}} }
+%       \vspace{6mm}
+%       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+%       \vspace{6mm}
+%       %\hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #5}, Netid: {\rm #6}} }
+%       %\hbox to 6.28in { {\it TA: #4  \hfill #6}}
+%      \vspace{2mm}}
+%   }
+%   \end{center}
+%   \markboth{#5 -- #1}{#5 -- #1}
+%   \vspace*{4mm}
+%}
+
+\newcommand{\homework}[4]{
+   %\pagestyle{myheadings}
+   \pagestyle{fancy}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf CS780:~Deep Reinforcement Learning \hfill {\small (#2)}} }
+       \vspace{6mm}
+       \hbox to 6.28in { {\Large \hfill #1  \hfill} }
+       \vspace{6mm}
+       %\hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #5}, Netid: {\rm #6}} }
+       \hbox to 6.28in { {\textbf{Instructor}: {\rm #3} \hfill }} 
+        \hbox to 6.28in { {\textbf{Submission Link}: {\rm #4} \hfill }} 
+       %\hbox to 6.28in { {\it TA: #4  \hfill #6}}
+      \vspace{2mm}}
+   }
+   \end{center}
+   %\markboth{CS698R -- #1}{CS698R -- #1}
+   \markboth{CS780: Deep Reinforcement Learning}{#1}
+   \vspace*{4mm}
+}
+
+%\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\hfill (#2 points)\newline\newline}
+\newcommand{\problem}[2]{~\\\fbox{\textbf{Problem #1}}\\(#2 points)\newline\newline}
+
+
+\newcommand{\subproblem}[1]{~\newline\textbf{(#1)}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Hy}{\mathcal{H}}
+\newcommand{\VS}{\textrm{VS}}
+\newcommand{\solution}{~\newline\textbf{\textit{(Solution)}} }
+
+\newcommand{\textbox}[1]{~\\\fbox{\textbf{#1}}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+\cfoot{\thepage}
+
+
+
+%%% END OF MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\homework{Assignment \#2}{Submission Deadline: 07/03/24, 09:59 AM}{Ashutosh Modi}{\url{https://forms.gle/LiXSz9sf4oaCv14T9}}
+%\homework{Assignment \#1}{Due: 10/09/21}{Ashutosh Modi}{}{Student name(s)}{NetId(s)}
+%\textbf{Course Policy}: 
+
+Read all the instructions below carefully before you start working on the assignment.
+\begin{itemize}
+\item  The purpose of this course is that you learn RL and the best way to do that is by implementation and experimentation. 
+\item The assignment requires your to implement some algorithms and you are required report your findings after experimenting with those algorithms. The report should be submitted in pdf format. 
+\item Implement the code in Google Colab Notebooks and include links to your notebook in your report. Provide a shorter tinyurl link instead of the entire link. The code should be very well documented. There are marks for that. Also, you need to download the notebook (zip it) and submit it.
+ \item In case you use any maths in your explanations, render it using latex in the notebook.
+ \item You are expected to implement algorithms on your own and not copy it from other sources/class mates. Of course, you can refer to lecture slides. 
+ \item If you use any reference or material (including code), please cite the source, else it will be considered plagiarism. But referring to other sources that directly solve the problems given in the assignment is not allowed. There is a limit to which you can refer to outside material. 
+   \item This is an individual assignment. 
+   \item In case your solution is found to have an overlap with solution by someone else (including external sources), all the parties involved will get zero in this and all future assignments plus further more penalties in the overall grade. We will check not just for lexical but also semantic overlap. Same applies for the code as well. \textbf{Even an iota of cheating would NOT be tolerated.} If you cheat one line or cheat one page the penalty would be same. 
+   \item Be a smart agent, think long term, if you cheat we will discover it somehow, the price you would be paying is not worth it. 
+   \item In case you are struggling with the assignment, seek help from TAs. Cheating is not an option! I respect honesty and would be lenient if you are not able to solve some questions due to difficulty in understanding. Remember we are there to help you out, seek help if something is difficult to understand. 
+      \item The deadline for the submission is given above. Submit at least 30 minutes before the deadline, lot can happen at the last moment, your internet can fail, there can be a power failure, you can be abducted by aliens, etc. 
+   \item You have to submit your assignment via following Google Form (link above) 
+   \item The form would close after the deadline and we will not accept any solution. No reason what-so-ever would be accepted for not being able to submit before the deadline. 
+   \item Since the assignment involves experimentation, reporting your results and observations, there is a lot of scope for creativity and innovation and presenting new perspectives. Such efforts would be highly appreciated and accordingly well rewarded. Be an exploratory agent! 
+   \item Your code should be very well documented, there are marks for that. 
+   \item  In your plots, have a clear legend and clear lines, etc. Of course you would generating the plots in your code but you must also put these plots in your notebook. Generate high resolution pdf/svg version of the plots so that it doesn't pixilate on zooming.
+ %  \item For implementing a new environment in OpenAI gym, you can refer to this tutorial:  \url{https://github.com/openai/gym/blob/master/docs/creating-environments.md}. Of course, you are encouraged to refer to other tutorials as well but cite your sources. Also check out the \texttt{env} class: \url{https://github.com/openai/gym/blob/master/gym/core.py}. You are not required to render the environment on the screen/terminal. Do remember to set the seed, this will be useful for reproducing your experiments. And we will use the seed provided by you to verify your results. Also for each instance of the environment that you create use a different seed and save these seeds, these will be useful for reproducing the results. Do not set the seed to 42  :P % U+1F61B
+  \item For all experiments, report about the seed used in the code documentation, write about the seed used.
+  \item In your notebook write about all things that are not obvious from the code e.g., if you have made any assumptions, references/sources, running time, etc. 
+    \item \textcolor{red}{\textbf{In addition to checking your code and report, very likely, we will be conducting one-on-one viva for the evaluation. So please make sure that you do not cheat! }}
+   \item \textcolor{red}{\textbf{Use of LLMs based tools or AI-based code tools is strictly prohibited! Use of ChatGPT, VS Code, Gemini, CO-Pilot, etc. is not allowed. NOTE VS code is also not allowed. Even in Colab disable the AI assistant. If you use it, we will know it very easily. Use of any of the tools would be counted as cheating and would be given a ZERO, with no questions asked.}}
+\end{itemize}
+
+%#######################################################################
+%%%%%%%%%%%%%%%%% PROBLEM 1 %%%%%%%%%%%%%%%%%%%%%%
+%#######################################################################
+%#######################################################################
+
+
+\textbox{Random-Maze Environment}
+\\
+\\
+\begin{figure}[h]
+%\begin{center}
+\captionsetup[subfigure]{justification=centering}
+\centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[scale=0.35]{./images/maze1.pdf}
+    \caption{Maze Environment}
+    \label{fig:1}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[scale=0.35]{./images/maze2.pdf}
+    \caption{Maze Environment Transitions}
+         \label{fig:2}
+  \end{subfigure}
+% \end{center}
+\end{figure}
+
+\noindent In this assignment we will be exploring a variant of the Random Maze Environment (RME) that we have been looking in the lectures. The environment is represented as a grid world in Figure \ref{fig:1}. Random maze environment is a highly stochastic environment with 11 states: two terminal states (a goal state (G) and a hole state (H)) and 9 non-terminal states and a wall in between the environment. The wall behaves similar to the wall on the periphery of the environment, basically if an agent bumps against the wall, it bounces back. The boundary of the environment behaves similarly, if an agent hits the boundary it bounces back. The agent receives a reward of +1 when it lands in the goal state (3) and it receives a reward of -1 when it lands in the hole state (7). For rest of the transitions there is a reward of -0.04. Essentially the agent has the living cost of -0.04. The transitions are stochastic as shown in Figure \ref{fig:2}. In this environment, four actions are possible: left, top, right, and bottom. For every intended action, there is 80\% chance of going in the intended direction and remaining 20\% chances of going in either of the orthogonal directions. The 20\% chance gets equally distributed between each of the orthogonal direction. The agent starts from state 8 (S).  Assume $\gamma = 0.99$ for the problems below. \\
+\\
+\noindent In this assignment we will be looking at control algorithms we learnt in Lectures. For each of the plot, \textbf{create the legend on the left/right side so that it doesn't overlay on the plot.}  For all the algorithms below, this time we will not be specifying the hyper-parameters, please play with the hyper-params to come up with the best values. This way you will learn to tune the model. As you are aware from your past experience,  single run of the algorithm over the environment results in plots that have lot of variance and look very noisy. One way to overcome this is to create several different instances of the environment using different seeds and then average out the results across these and plot these. For all the plots below, you this strategy.  
+\newpage
+\problem{1: Monte Carlo Control}{40+20+20+5+5+5+5=100}
+Implement the Monte Carlo Control for the Random Maze Environment (RME) described above. In particular, you need to implement First Visit Monte Carlo Control (FMVCC) for finding the optimal policy for RME. Use the function definition (given below) as given in Lecture slides. \\
+\\
+\texttt{
+MonteCarloControl(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, maxSteps, noEpisodes, firstVisit = True)
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+\problem{2: SARSA (TD Control)}{40+20+20+5+5+5+5=100}
+Implement the SARSA algorithm for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+SARSA(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, noEpisodes)
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+
+\problem{3: Q-Learning}{40+20+20+5+5+5+5=100}
+Implement the Q-Learning algorithm for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+Q-Learning(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, noEpisodes)
+}
+
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+\problem{4: Double Q-Learning}{40+20+20+5+5+5+5=100}
+Implement the Double Q-Learning algorithm for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+Double-Q-Learning(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, noEpisodes)
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+\problem{5: Comparing Control Algorithms}{20+5+5+5+5+5=40}
+For FVMCC, SARSA, Q and Double-Q algorithms implemented above, do the following:
+
+\begin{enumerate}[label=(\alph*)]
+\item For each of the algorithm, in a single plot, plot the evolution of Policy Success Rate (in \%) vs Episodes. Policy Success Rate is defined as number of times the agent reaches the goal state out of the total number of the episodes run using a specific policy. Basically implement the following function that would return the policy success percentage. As you are training the agent, at each episode, you will have a version of the policy, use that policy along with the function below to get the policy success rate. 
+
+\texttt{def getPolicySuccessRate(env, $\pi_{current}$, goalState, maxEpisodes=100, maxSteps=200)}
+
+\item What are your observations from the Policy Success Rate (in \%) plot. 
+
+\item For each of the algorithm (in a single plot), plot the Estimated Expected Return (from the start state) vs Episodes.
+
+\item What are your observations for the Estimated Expected Return plot?
+
+\item For each of the algorithm (in a single plot), plot the State-value Function Estimation Error vs Episodes. State-value Function Estimation Error is defined as Mean Absolute Error across all V-function estimates (across all states) from the respective optimal value.  
+
+\item What are your observations for the State-value Function Estimation Error plot?
+
+\end{enumerate}
+
+\problem{6: SARSA($\lambda$) Replacing}{40+20+20+5+5+5+5=100}
+Implement the SARSA($\lambda$) algorithm with Replacing Eligibility Traces for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+SARSA-Lambda(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, $\lambda$, noEpisodes, replaceTrace = True)
+}
+
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+
+\problem{7: SARSA($\lambda$) Accumulating}{40+20+20+5+5+5+5=100}
+Implement the SARSA($\lambda$) algorithm with Accumulating Eligibility Traces for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides.  \\
+\\
+\texttt{
+SARSA-Lambda(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, $\lambda$, noEpisodes, replaceTrace = False)
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+\problem{8: Q($\lambda$) Replacing}{40+20+20+5+5+5+5=100}
+Implement the Q($\lambda$) algorithm with Replacing Eligibility Traces for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides.  \\
+\\
+\texttt{
+Q-Lambda(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, $\lambda$, noEpisodes, replaceTrace = True)
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+
+\problem{9: Q($\lambda$) Accumulating}{40+20+20+5+5+5+5=100}
+Implement the Q($\lambda$) algorithm with Accumulating Eligibility Traces for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+Q-Lambda(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, $\lambda$, noEpisodes, replaceTrace = False)
+}
+
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+\problem{10: Dyna-Q}{40+20+20+5+5+5+5=100}
+Implement the Dyna-Q algorithm for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+Dyna-Q(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, noEpisodes, noPlanning)
+}
+
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+
+\problem{11: Trajectory Learning}{40+20+20+5+5+5+5=100}
+Implement the Trajectory Learning algorithm for the Random Maze Environment (RME) described above. Use the function definition as given in Lecture slides. \\
+\\
+\texttt{
+TrajectorySampling(env, $\gamma$, $\alpha_{0}$, $\epsilon_{0}$, noEpisodes, maxTrajectory)
+}
+
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot evolution of State-value (V) function with time. Basically, plot V-function vs Episodes for states 0, 1, 2, 4, 6, 8,  9, 10, 11 in a single plot. Also plot the true V-function for each of the state in the same plot. 
+\item Plot evolution of action state value (Q) function with time. Plot Q function vs Episodes for states 0, 1, 2, 4, 6, 8, 9, 10, 11 in a single plot. Also plot the true Q-function for each of the state in the same plot.  
+\item Describe over how many instances of the environments did you average the results? Write about the seeds used for each instance. 
+\item Draw the environment diagram with optimal policy (shown using arrows) obtained using the algorithm.  
+\item Write about the hyper-parameters you finally used for the algorithm and describe how did you arrive at these set of hyper-params. 
+\item Write about your observations from the plots above.
+\end{enumerate}
+
+\problem{12: Comparing Control Algorithms}{5+5+5+5+5+5=25}
+For SARSA($\lambda$) Replacing, SARSA($\lambda$) Accumulating, Q($\lambda$) Replacing, Q($\lambda$) Accumulating, Dyna-Q, Trajectory Learning implemented above, do the following:
+
+\begin{enumerate}[label=(\alph*)]
+\item For each of the algorithm, in a single plot, plot the evolution of Policy Success Rate (in \%) vs Episodes.
+
+\item What are your observations from the Policy Success Rate (in \%) plot. 
+
+\item For each of the algorithm (in a single plot), plot the Estimated Expected Return (from the start state) vs Episodes.
+
+\item What are your observations for the Estimated Expected Return plot?
+
+\item For each of the algorithm (in a single plot), plot the State-value Function Estimation Error vs Episodes. State-value Function Estimation Error is defined as Mean Absolute Error across all V-function estimates (across all states) from the respective optimal value.  
+
+\item What are your observations for the State-value Function Estimation Error plot?
+
+\end{enumerate}
+
+%#######################################################################
+%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%
+%#######################################################################
+%#######################################################################
+
+\end{document} 
